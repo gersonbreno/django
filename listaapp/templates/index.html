@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Lista de Tarefa{% endblock %}
+{% block content %}
+
+    <main class = "container">
+        <h1>Lista de tarefas</h1>
+        {% if lista %}
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">tiltulo</th>
+                <th scope="col">Criado EM</th>
+                <th scope="col">Data de entrega</th>
+                <th scope="col">Finalizado em</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+               
+                {% for listas in lista %}
+              <tr>
+                <th scope="row">{{listas.id}}</th>
+                <td>{{listas.titulo}}</td>
+                <td>{{listas.data_criacao}}</td>
+                <td>{{listas.data_entrega}}</td>
+                <td>{{listas.data_fim|default:"-"}}</td>
+                <td>
+                    <a href="{% url 'concluir' listas.pk %}" class= "btn btn-primary btn-sm {% if listas.data_fim %}disabled{% endif %}" >Concluir</a>
+                    <a href="{% url 'atualizar'  listas.pk %}" class= "btn btn-success btn-sm {% if listas.data_fim %}disabled{% endif %}">Editar</a>
+                    <a href="{% url 'excluir'  listas.pk %}" class= "btn btn-danger btn-sm">Excluir</a>
+                </td>
+              </tr>
+             
+              {% endfor %}
+            
+            </tbody>
+            {% else %}
+            <p>Não há tarefas cadastradas no momento. Comece adicionando suas primeiras tarefas para organizar seu trabalho."</p>
+            {% endif %}
+            <th>
+              <td><a href="{% url "crialista" %}" class = "btn btn-success">Nova Tarefa</a></td>
+            </th>
+            
+          </table>
+    </main>
+   
+    {% endblock %}
