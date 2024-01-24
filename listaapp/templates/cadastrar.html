@@ -5,8 +5,8 @@
     <main class = "container">
 
         <h1>Cadastrar nova tarefa</h1>
-        <form action=""  method = "POST">
-          {% csrf_token %}
+        <form action=""  method = "POST">{% csrf_token %}
+          
           {{ form.as_p }}
           <button type="submit">Salvar</button>
             
